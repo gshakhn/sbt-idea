@@ -8,10 +8,9 @@ object SbtIdeaBuild extends Build with BuildExtra {
     sbtPlugin := true,
     organization := "com.github.mpeltonen",
     name := "sbt-idea",
-    version := "1.6.0-SNAPSHOT",
+    version := "1.7.0-SNAPSHOT",
     sbtVersion in Global := "0.13.0",
     scalaVersion in Global := "2.10.3",
-    publishTo := Some(Resolver.file("Github Pages", Path.userHome / "git" / "mpeltonen.github.com" / "maven" asFile)(Patterns(true, Resolver.mavenStyleBasePattern))),
     publishTo <<= version { (v: String) =>
       val nexus = "https://oss.sonatype.org/"
       if (v.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
@@ -29,7 +28,8 @@ object SbtIdeaBuild extends Build with BuildExtra {
     libraryDependencies ++= Seq(
       "commons-io" % "commons-io" % "2.0.1"
     )
-  ) // ++ addSbtPlugin("org.scala-sbt" % "sbt-android" % "0.6.4" % "provided")
+  ) ++ addSbtPlugin("com.hanhuy.sbt" % "android-sdk-plugin" % "0.9.3" % "provided")
+
 
   def extraPom = (
     <url>http://your.project.url</url>
